@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-Mart — Xalqaro Xotin-Qizlar Kuni Muborak!</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌷</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --rose: #e8436d;
+            --rose-light: #ff6b8a;
+            --rose-dark: #c2185b;
+            --gold: #d4a039;
+            --gold-light: #f0cb69;
+            --pink: #fce4ec;
+            --cream: #fff8f0;
+            --purple: #8e24aa;
+            --lavender: #e1bee7;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: #3e2723;
+            overflow-x: hidden;
+        }
+
+        /* ========== PRELOADER ========== */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0, #f48fb1);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader-flower {
+            font-size: 80px;
+            animation: preloaderSpin 2s ease-in-out infinite;
+        }
+        .preloader-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 36px;
+            color: var(--rose-dark);
+            margin-top: 20px;
+            animation: preloaderPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes preloaderSpin {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(15deg) scale(1.2); }
+        }
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ========== FALLING PETALS ========== */
+        .petals-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            overflow: hidden;
+        }
+        .petal {
+            position: absolute;
+            top: -60px;
+            opacity: 0.7;
+            animation: petalFall linear infinite;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        @keyframes petalFall {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
+        }
+
+        /* ========== SPARKLE CURSOR ========== */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            animation: sparkleAnim 0.8s ease-out forwards;
+        }
+        @keyframes sparkleAnim {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: scale(0) rotate(180deg); opacity: 0; }
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 25%, #f48fb1 50%, #ec407a 75%, #e91e63 100%);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212,160,57,0.2) 0%, transparent 40%),
+                radial-gradient(circle at 60% 80%, rgba(142,36,170,0.15) 0%, transparent 40%);
+        }
+        .hero-bg-flowers {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .hero-bg-flower {
+            position: absolute;
+            font-size: 60px;
+            opacity: 0.15;
+            animation: floatFlower 8s ease-in-out infinite;
+        }
+        @keyframes floatFlower {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 20px;
+            animation: heroEnter 1.5s ease-out;
+        }
+        @keyframes heroEnter {
+            0% { opacity: 0; transform: translateY(60px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 8px 28px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            animation: badgeGlow 3s ease-in-out infinite;
+        }
+        @keyframes badgeGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+            50% { box-shadow: 0 0 40px rgba(255,255,255,0.4); }
+        }
+
+        .hero-eight {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(120px, 20vw, 250px);
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.15), 0 0 80px rgba(255,255,255,0.3);
+            line-height: 1;
+            position: relative;
+            display: inline-block;
+        }
+        .hero-eight .mart {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(40px, 7vw, 80px);
+            display: block;
+            font-weight: 400;
+            margin-top: -20px;
+            color: var(--gold-light);
+            text-shadow: 0 2px 15px rgba(212,160,57,0.5);
+        }
+        .hero-eight .flower-accent {
+            position: absolute;
+            top: -20px;
+            right: -40px;
+            font-size: clamp(40px, 6vw, 70px);
+            animation: flowerBounce 2s ease-in-out infinite;
+        }
+        @keyframes flowerBounce {
+            0%, 100% { transform: rotate(-10deg) scale(1); }
+            50% { transform: rotate(10deg) scale(1.1); }
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 5vw, 56px);
+            font-weight: 700;
+            color: white;
+            margin-top: 20px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: rgba(255,255,255,0.9);
+            margin-top: 15px;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            animation: scrollBounce 2s ease-in-out infinite;
+            cursor: pointer;
+            z-index: 5;
+        }
+        .scroll-indicator .arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid rgba(255,255,255,0.7);
+            border-bottom: 2px solid rgba(255,255,255,0.7);
+            transform: rotate(45deg);
+        }
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ========== SECTION STYLES ========== */
+        section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 52px);
+            text-align: center;
+            color: var(--rose-dark);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: clamp(16px, 2vw, 20px);
+            color: #6d4c41;
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+        .section-divider .line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .section-divider .icon {
+            font-size: 24px;
+        }
+
+        /* ========== DEDICATION SECTION ========== */
+        .dedication {
+            background: linear-gradient(180deg, var(--cream) 0%, #fff5f7 100%);
+        }
+
+        .dedication-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .dedication-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(232,67,109,0.08);
+            border: 1px solid rgba(232,67,109,0.08);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .dedication-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .dedication-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rose), var(--gold), var(--purple));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+        .dedication-card:hover::before {
+            transform: scaleX(1);
+        }
+        .dedication-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(232,67,109,0.15);
+        }
+
+        .card-emoji {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: cardEmojiBounce 3s ease-in-out infinite;
+        }
+        @keyframes cardEmojiBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .card-role {
+            font-family: 'Great Vibes', cursive;
+            font-size: 32px;
+            color: var(--rose);
+            margin-bottom: 8px;
+        }
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        .card-message {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #5d4037;
+        }
+
+        /* ========== POEM SECTION ========== */
+        .poem-section {
+            background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        .poem-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(232,67,109,0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(212,160,57,0.1) 0%, transparent 40%);
+        }
+        .poem-stars {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .poem-star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: starTwinkle 3s ease-in-out infinite;
+        }
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .poem-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .poem-section .section-title {
+            color: var(--gold-light);
+        }
+        .poem-quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 120px;
+            color: rgba(232,67,109,0.2);
+            line-height: 0.5;
+            margin-bottom: 20px;
+        }
+        .poem-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(18px, 2.5vw, 24px);
+            line-height: 2;
+            color: rgba(255,255,255,0.9);
+            font-style: italic;
+        }
+        .poem-text .highlight {
+            color: var(--gold-light);
+            font-weight: 700;
+            font-style: normal;
+        }
+        .poem-author {
+            margin-top: 30px;
+            font-size: 16px;
+            color: var(--rose-light);
+            font-family: 'Great Vibes', cursive;
+            font-size: 28px;
+        }
+
+        /* ========== QUALITIES SECTION ========== */
+        .qualities {
+            background: linear-gradient(180deg, #fff5f7 0%, var(--cream) 100%);
+        }
+
+        .qualities-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .quality-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        .quality-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .quality-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 30px rgba(232,67,109,0.12);
+        }
+        .quality-icon {
+            font-size: 36px;
+            flex-shrink: 0;
+        }
+        .quality-text {
+            font-size: 17px;
+            color: #4e342e;
+            font-weight: 500;
+        }
+
+        /* ========== WISHES SECTION ========== */
+        .wishes {
+            background: linear-gradient(135deg, #e91e63 0%, #c2185b 30%, #880e4f 60%, #4a148c 100%);
+            color: white;
+            text-align: center;
+        }
+        .wishes .section-title { color: white; }
+        .wishes-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .wish-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 24px;
+            padding: 50px 40px;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.6s ease;
+        }
+        .wish-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .wish-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.02);
+        }
+        .wish-emoji {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        .wish-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(20px, 3vw, 28px);
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        /* ========== PHOTO GALLERY SECTION ========== */
+        .gallery {
+            background: var(--cream);
+            text-align: center;
+        }
+        .hearts-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .heart-container {
+            width: 160px;
+            height: 160px;
+            position: relative;
+            animation: heartFloat 4s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .heart-container:nth-child(2) { animation-delay: 0.5s; }
+        .heart-container:nth-child(3) { animation-delay: 1s; }
+        .heart-container:nth-child(4) { animation-delay: 1.5s; }
+        .heart-container:hover { transform: scale(1.15); }
+        @keyframes heartFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .heart-shape {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+            clip-path: path('M80 30 C80 0, 160 0, 160 50 C160 100, 80 145, 80 145 C80 145, 0 100, 0 50 C0 0, 80 0, 80 30 Z');
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(232,67,109,0.3);
+        }
+        .heart-shape span {
+            color: white;
+            font-size: 48px;
+            margin-top: -10px;
+        }
+        .heart-label {
+            font-family: 'Great Vibes', cursive;
+            font-size: 22px;
+            color: var(--rose-dark);
+            margin-top: 10px;
+        }
+
+        /* ========== TIMELINE ========== */
+        .timeline-section {
+            background: linear-gradient(180deg, var(--cream), #fff5f7);
+        }
+        .timeline {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--rose), var(--gold), var(--purple));
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 44px;
+            background: white;
+            border: 3px solid var(--rose);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(232,67,109,0.2);
+        }
+        .timeline-content {
+            width: 42%;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.06);
+        }
+        .timeline-content h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--rose-dark);
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+        .timeline-content p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #5d4037;
+        }
+
+        @media (max-width: 600px) {
+            .timeline::before { left: 20px; }
+            .timeline-item,
+            .timeline-item:nth-child(odd) {
+                flex-direction: row;
+                padding-left: 60px;
+            }
+            .timeline-dot {
+                left: 20px;
+            }
+            .timeline-content {
+                width: 100%;
+            }
+        }
+
+        /* ========== CONFETTI BUTTON ========== */
+        .celebration-section {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .celebrate-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 50px;
+            font-size: 22px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--rose), var(--purple));
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(232,67,109,0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .celebrate-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(232,67,109,0.5);
+        }
+        .celebrate-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+        .celebrate-btn .btn-sparkle {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: translateX(-100%);
+            animation: btnSparkle 3s ease-in-out infinite;
+        }
+        @keyframes btnSparkle {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        /* ========== CONFETTI ========== */
+        .confetti-piece {
+            position: fixed;
+            z-index: 9997;
+            pointer-events: none;
+        }
+
+        /* ========== MUSIC VISUALIZER ========== */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9996;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rose), var(--purple));
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(232,67,109,0.4);
+            transition: all 0.3s ease;
+        }
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+        .music-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 20px;
+        }
+        .music-bar {
+            width: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: height 0.2s ease;
+        }
+        .music-bars.playing .music-bar:nth-child(1) { animation: musicBar 0.8s ease-in-out infinite; }
+        .music-bars.playing .music-bar:nth-child(2) { animation: musicBar 0.6s ease-in-out infinite 0.1s; }
+        .music-bars.playing .music-bar:nth-child(3) { animation: musicBar 0.7s ease-in-out infinite 0.2s; }
+        .music-bars.playing .music-bar:nth-child(4) { animation: musicBar 0.5s ease-in-out infinite 0.3s; }
+        .music-bars:not(.playing) .music-bar { height: 4px !important; }
+        @keyframes musicBar {
+            0%, 100% { height: 4px; }
+            50% { height: 20px; }
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(135deg, #1a0a2e, #2d1b4e);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .footer-heart {
+            font-size: 40px;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.2); }
+        }
+        .footer-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(24px, 4vw, 40px);
+            margin-top: 15px;
+            color: var(--gold-light);
+        }
+        .footer-sub {
+            margin-top: 10px;
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+        .footer-flowers {
+            margin-top: 20px;
+            font-size: 30px;
+            letter-spacing: 10px;
+        }
+
+        /* ========== FIREWORKS CANVAS ========== */
+        #fireworks-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9995;
+        }
+
+        /* ========== NAV DOTS ========== */
+        .nav-dots {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 9990;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(232,67,109,0.3);
+            border: 2px solid var(--rose);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-dot.active {
+            background: var(--rose);
+            transform: scale(1.3);
+        }
+        .nav-dot:hover {
+            background: var(--rose-light);
+        }
+
+        @media (max-width: 768px) {
+            .nav-dots { display: none; }
+            .dedication-grid { grid-template-columns: 1fr; }
+            .heart-container { width: 120px; height: 120px; }
+            .hero-eight .flower-accent { right: -20px; top: -10px; }
+            section { padding: 70px 15px; }
+        }
+
+        /* ========== FLOATING ELEMENTS ========== */
+        .float-element {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.07;
+            font-size: 40px;
+        }
+
+        /* ========== SPECIAL GLOW TEXT ========== */
+        .glow-text {
+            background: linear-gradient(135deg, var(--rose), var(--gold), var(--purple), var(--rose));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ========== LETTER SECTION ========== */
+        .letter-section {
+            background: linear-gradient(180deg, #fff5f7, var(--cream));
+        }
+        .letter-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(232,67,109,0.1);
+            position: relative;
+            border: 1px solid rgba(232,67,109,0.1);
+        }
+        .letter-container::before {
+            content: '💌';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+        }
+        .letter-greeting {
+            font-family: 'Great Vibes', cursive;
+            font-size: 36px;
+            color: var(--rose);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .letter-body {
+            font-size: 17px;
+            line-height: 2;
+            color: #4e342e;
+            text-align: center;
+        }
+        .letter-signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 30px;
+            color: var(--gold);
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 500px) {
+            .letter-container { padding: 40px 25px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-flower">🌸</div>
+        <div class="preloader-text">Tayyorlanmoqda...</div>
+    </div>
+
+    <!-- FALLING PETALS -->
+    <div class="petals-container" id="petals"></div>
+
+    <!-- FIREWORKS CANVAS -->
+    <canvas id="fireworks-canvas"></canvas>
+
+    <!-- NAV DOTS -->
+    <nav class="nav-dots" id="navDots">
+        <div class="nav-dot active" data-section="hero"></div>
+        <div class="nav-dot" data-section="dedication"></div>
+        <div class="nav-dot" data-section="poem"></div>
+        <div class="nav-dot" data-section="qualities"></div>
+        <div class="nav-dot" data-section="letter"></div>
+        <div class="nav-dot" data-section="wishes"></div>
+        <div class="nav-dot" data-section="celebration"></div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-flowers">
+            <div class="hero-bg-flower" style="top:10%;left:5%">🌸</div>
+            <div class="hero-bg-flower" style="top:60%;left:10%;animation-delay:1s">🌺</div>
+            <div class="hero-bg-flower" style="top:20%;right:8%;animation-delay:2s">🌷</div>
+            <div class="hero-bg-flower" style="top:70%;right:5%;animation-delay:0.5s">🌹</div>
+            <div class="hero-bg-flower" style="top:40%;left:15%;animation-delay:1.5s;font-size:40px">🦋</div>
+            <div class="hero-bg-flower" style="top:80%;right:15%;animation-delay:3s;font-size:40px">✨</div>
+            <div class="hero-bg-flower" style="top:30%;right:20%;animation-delay:2.5s;font-size:45px">🌼</div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">8 - Mart Bayrami</div>
+            <div class="hero-eight">
+                8
+                <span class="flower-accent">🌷</span>
+                <span class="mart">Mart</span>
+            </div>
+            <h1 class="hero-title">Xalqaro Xotin-Qizlar Kuni<br>Muborak Bo'lsin!</h1>
+            <p class="hero-subtitle">
+                Eng aziz va mehribon ayollarimizga — onamga, opalarimga va buvimga
+                cheksiz muhabbat va ehtirom bilan
+            </p>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('dedication').scrollIntoView({behavior:'smooth'})">
+            <span>Pastga suring</span>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- DEDICATION -->
+    <section class="dedication" id="dedication">
+        <h2 class="section-title">Sizlarga Bag'ishlayman</h2>
+        <div class="section-divider">
+            <div class="line"></div>
+            <div class="icon">🌹</div>
+            <div class="line"></div>
+        </div>
+
+        <div class="dedication-grid">
+            <div class="dedication-card" data-delay="0">
+                <div class="card-emoji">👩‍👦</div>
+                <div class="card-role">Onajon</div>
+                <div class="card-name">Eng Aziz Inson</div>
+                <p class="card-message">
+                    Siz hayotimdagi eng porloq yulduzsiz. Mehribonligingiz, sabringiz va
+                    cheksiz muhabbatingiz uchun minnatdorman. Siz bo'lmasa, bu dunyo
+                    ma'nosiz bo'lardi. Sizni juda-juda yaxshi ko'raman!
+                </p>
+            </div>
+
+            <div class="dedication-card" data-delay="200">
+                <div class="card-emoji">👭</div>
+                <div class="card-role">Opalarim</div>
+                <div class="card-name">Eng Yaqin Do'stlarim</div>
+                <p class="card-message">
+                    Sizlar hayotimning eng go'zal sovg'asisiz. Har doim yonimda
+                    bo'lganingiz, qo'llab-quvvatlaganingiz, kulib-yig'laganingiz uchun
+                    rahmat. Sizlarsiz hayotim to'liq bo'lmas edi!
+                </p>
+            </div>
+
+            <div class="dedication-card" data-delay="400">
+                <div class="card-emoji">👵</div>
+                <div class="card-role">Buvijon</div>
+                <div class="card-name">Oilamiz Tayanchi</div>
+                <p class="card-message">
+                    Siz oilamizning eng qimmatli durdonasisiz. Donoligingiz, iliq
+                    so'zlaringiz va mehribonligingiz bizga har doim kuch beradi.
+                    Siz bilan faxrlanamiz! Uzoq umr ko'ring!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- POEM SECTION -->
+    <section class="poem-section" id="poem">
+        <div class="poem-stars" id="poemStars"></div>
+        <div class="poem-container">
+            <h2 class="section-title">She'r</h2>
+            <div class="section-divider">
+                <div class="line" style="background:linear-gradient(90deg,transparent,var(--gold-light),transparent)"></div>
+                <div class="icon">✨</div>
+                <div class="line" style="background:linear-gradient(90deg,transparent,var(--gold-light),transparent)"></div>
+            </div>
+            <div class="poem-quote-mark">"</div>
+            <div class="poem-text">
+                Sizlarga <span class="highlight">gullar</span> emas,<br>
+                Butun bir <span class="highlight">bog'</span> arziydi.<br>
+                Sizlarga <span class="highlight">so'zlar</span> emas,<br>
+                Butun bir <span class="highlight">doston</span> arziydi.<br><br>
+                Sizlar bor <span class="highlight">dunyo</span> go'zal,<br>
+                Sizlarsiz <span class="highlight">bahor</span> kelmaydi.<br>
+                Har bir <span class="highlight">tabassumingiz</span><br>
+                Ming bir <span class="highlight">gulni</span> ochdiradi.
+            </div>
+            <div class="poem-author">— Muhabbat bilan</div>
+        </div>
+    </section>
+
+    <!-- QUALITIES -->
+    <section class="qualities" id="qualities">
+        <h2 class="section-title">Sizlar Nima Uchun Ajoyibsiz</h2>
+        <div class="section-divider">
+            <div class="line"></div>
+            <div class="icon">💎</div>
+            <div class="line"></div>
+        </div>
+        <div class="qualities-grid">
+            <div class="quality-item"><span class="quality-icon">💖</span><span class="quality-text">Cheksiz mehribonlik</span></div>
+            <div class="quality-item"><span class="quality-icon">🌟</span><span class="quality-text">Doimo ilhom berasiz</span></div>
+            <div class="quality-item"><span class="quality-icon">🤗</span><span class="quality-text">Eng issiq quchoq</span></div>
+            <div class="quality-item"><span class="quality-icon">🦁</span><span class="quality-text">Kuchli va jasur</span></div>
+            <div class="quality-item"><span class="quality-icon">🍳</span><span class="quality-text">Eng mazali taomlar</span></div>
+            <div class="quality-item"><span class="quality-icon">🧠</span><span class="quality-text">Dono va aqlli</span></div>
+            <div class="quality-item"><span class="quality-icon">😊</span><span class="quality-text">Tabassumingiz — nur</span></div>
+            <div class="quality-item"><span class="quality-icon">🏠</span><span class="quality-text">Uyni jannatga aylantiruvchi</span></div>
+            <div class="quality-item"><span class="quality-icon">💪</span><span class="quality-text">Hech qachon taslim bo'lmaysiz</span></div>
+        </div>
+    </section>
+
+    <!-- LETTER -->
+    <section class="letter-section" id="letter">
+        <h2 class="section-title">Yurakdan Xat</h2>
+        <div class="section-divider">
+            <div class="line"></div>
+            <div class="icon">💌</div>
+            <div class="line"></div>
+        </div>
+        <div class="letter-container">
+            <div class="letter-greeting">Assalomu alaykum, azizlarim!</div>
+            <div class="letter-body">
+                Bugun 8-Mart — Xalqaro Xotin-Qizlar kuni. Bu bayram kunida
+                sizlarga shunchaki tabrik emas, balki yuragimning eng chuqur
+                burchagidan kelayotgan so'zlarni aytmoqchiman.
+                <br><br>
+                <strong>Onajon</strong> — siz menga hayot bergan, meni tarbiyalagan,
+                har qadamimda qo'llab-quvvatlagan eng buyuk insonsiz. Sizning
+                har bir qurbonligingiz, uyqusiz tunlaringiz, tinmay mehnat
+                qilganingiz — bularning barchasini bilaman va qadrlayman.
+                <br><br>
+                <strong>Opalarim</strong> — sizlar menga nafaqat opa, balki eng yaqin
+                do'st, maslahatchi va himoyachisiz. Sizlar bilan o'sganim —
+                hayotimning eng katta baxtlaridan biri.
+                <br><br>
+                <strong>Buvijon</strong> — sizning ertaklaringiz, duolaringiz va
+                iliq qo'llaringiz hali ham xotiramda. Siz oilamizning
+                asosiy ustunisiz.
+                <br><br>
+                Sizlarni juda-juda yaxshi ko'raman! Har kuningiz bahor kabi
+                go'zal, gullar kabi xushbo'y bo'lsin!
+            </div>
+            <div class="letter-signature">Muhabbat bilan, sizning farzandingiz ❤️</div>
+        </div>
+    </section>
+
+    <!-- GALLERY / HEARTS -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Yurakdagi Insonlar</h2>
+        <div class="section-divider">
+            <div class="line"></div>
+            <div class="icon">💕</div>
+            <div class="line"></div>
+        </div>
+        <div class="hearts-row">
+            <div class="heart-container">
+                <div class="heart-shape"><span>👩</span></div>
+                <div class="heart-label">Onajon</div>
+            </div>
+            <div class="heart-container">
+                <div class="heart-shape"><span>👧</span></div>
+                <div class="heart-label">Opajon</div>
+            </div>
+            <div class="heart-container">
+                <div class="heart-shape"><span>👧</span></div>
+                <div class="heart-label">Opajon</div>
+            </div>
+            <div class="heart-container">
+                <div class="heart-shape"><span>👵</span></div>
+                <div class="heart-label">Buvijon</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WISHES -->
+    <section class="wishes" id="wishes">
+        <h2 class="section-title">Tilaklarim</h2>
+        <div class="section-divider">
+            <div class="line" style="background:linear-gradient(90deg,transparent,white,transparent)"></div>
+            <div class="icon">🕊️</div>
+            <div class="line" style="background:linear-gradient(90deg,transparent,white,transparent)"></div>
+        </div>
+        <div class="wishes-container">
+            <div class="wish-card">
+                <div class="wish-emoji">🌸</div>
+                <div class="wish-text">
+                    Har kuningiz bahor kabi iliq,<br>
+                    tabassumingiz hech qachon so'nmasin!
+                </div>
+            </div>
+            <div class="wish-card">
+                <div class="wish-emoji">✨</div>
+                <div class="wish-text">
+                    Orzularingiz ro'yobga chiqsin,<br>
+                    ko'zlaringizda doim shodlik bo'lsin!
+                </div>
+            </div>
+            <div class="wish-card">
+                <div class="wish-emoji">💐</div>
+                <div class="wish-text">
+                    Sog'lik, baxt, omad va muvaffaqiyat<br>
+                    sizlarga hamroh bo'lsin!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CELEBRATION -->
+    <section class="celebration-section" id="celebration">
+        <h2 class="section-title" style="margin-bottom:30px">Bayramni Nishonlaylik!</h2>
+        <button class="celebrate-btn" id="celebrateBtn" onclick="launchCelebration()">
+            <span class="btn-sparkle"></span>
+            🎉 Tabriklayman! 🎉
+        </button>
+        <p style="margin-top:20px;color:var(--rose-dark);font-size:15px">Tugmani bosing va sehrni ko'ring!</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-heart">❤️</div>
+        <div class="footer-text">Sizlarni juda yaxshi ko'raman!</div>
+        <div class="footer-flowers">🌷🌸🌺🌻🌼🌹</div>
+        <p class="footer-sub">8-Mart 2026 &bull; Muhabbat bilan yaratilgan</p>
+    </footer>
+
+    <!-- MUSIC BUTTON -->
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Musiqa">
+        <div class="music-bars" id="musicBars">
+            <div class="music-bar" style="height:4px"></div>
+            <div class="music-bar" style="height:4px"></div>
+            <div class="music-bar" style="height:4px"></div>
+            <div class="music-bar" style="height:4px"></div>
+        </div>
+    </button>
+
+    <script>
+        // ========== PRELOADER ==========
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // ========== FALLING PETALS ==========
+        const petalEmojis = ['🌸', '🌺', '💮', '🏵️', '🌷', '💐', '🌹'];
+        const petalsContainer = document.getElementById('petals');
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.fontSize = (20 + Math.random() * 25) + 'px';
+            petal.style.animationDuration = (8 + Math.random() * 12) + 's';
+            petal.style.animationDelay = Math.random() * 2 + 's';
+            petalsContainer.appendChild(petal);
+            setTimeout(() => petal.remove(), 22000);
+        }
+
+        setInterval(createPetal, 800);
+        for (let i = 0; i < 8; i++) setTimeout(createPetal, i * 300);
+
+        // ========== SPARKLE CURSOR ==========
+        const sparkleEmojis = ['✨', '💖', '⭐', '🌟', '💫'];
+        let lastSparkleTime = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastSparkleTime < 100) return;
+            lastSparkleTime = now;
+
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            sparkle.style.fontSize = (12 + Math.random() * 16) + 'px';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 800);
+        });
+
+        // ========== SCROLL ANIMATIONS ==========
+        const observerOptions = { threshold: 0.2, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.dedication-card, .quality-item, .wish-card, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Quality items staggered delay
+        document.querySelectorAll('.quality-item').forEach((el, i) => {
+            el.dataset.delay = i * 100;
+        });
+
+        // ========== NAV DOTS ==========
+        const sections = ['hero', 'dedication', 'poem', 'qualities', 'letter', 'wishes', 'celebration'];
+        const dots = document.querySelectorAll('.nav-dot');
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const target = document.getElementById(dot.dataset.section);
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    dots.forEach(d => d.classList.remove('active'));
+                    const activeDot = document.querySelector(`.nav-dot[data-section="${entry.target.id}"]`);
+                    if (activeDot) activeDot.classList.add('active');
+                }
+            });
+        }, { threshold: 0.4 });
+
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) sectionObserver.observe(el);
+        });
+
+        // ========== POEM STARS ==========
+        const starsContainer = document.getElementById('poemStars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.classList.add('poem-star');
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 3) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // ========== CONFETTI & CELEBRATION ==========
+        function launchCelebration() {
+            // Launch confetti
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => createConfetti(), i * 15);
+            }
+            // Launch fireworks
+            launchFireworks();
+
+            // Vibrate on mobile
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti-piece');
+            const colors = ['#e91e63', '#ff5722', '#ffeb3b', '#4caf50', '#2196f3', '#9c27b0', '#ff9800', '#e91e63'];
+            const shapes = ['🌸', '🌺', '⭐', '💖', '🎀', '🌷', '✨', '🦋', '🎊', '🎉'];
+
+            if (Math.random() > 0.4) {
+                confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                confetti.style.fontSize = (15 + Math.random() * 20) + 'px';
+            } else {
+                confetti.style.width = (8 + Math.random() * 8) + 'px';
+                confetti.style.height = (8 + Math.random() * 12) + 'px';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            }
+
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-20px';
+            confetti.style.position = 'fixed';
+            confetti.style.zIndex = '9997';
+            confetti.style.pointerEvents = 'none';
+
+            const duration = 2000 + Math.random() * 3000;
+            const xDrift = -200 + Math.random() * 400;
+
+            confetti.animate([
+                { transform: 'translateY(0) translateX(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(${window.innerHeight + 50}px) translateX(${xDrift}px) rotate(${360 + Math.random() * 720}deg)`, opacity: 0 }
+            ], {
+                duration: duration,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            });
+
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), duration);
+        }
+
+        // ========== FIREWORKS ==========
+        const canvas = document.getElementById('fireworks-canvas');
+        const ctx = canvas.getContext('2d');
+        let fireworksActive = false;
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 2 + Math.random() * 6;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.life = 1;
+                this.decay = 0.015 + Math.random() * 0.02;
+                this.size = 2 + Math.random() * 3;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.05;
+                this.vx *= 0.99;
+                this.life -= this.decay;
+                this.size *= 0.98;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.life;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function launchFireworks() {
+            fireworksActive = true;
+            const colors = ['#e91e63', '#ff5722', '#ffeb3b', '#4caf50', '#2196f3', '#9c27b0', '#ff9800', '#ffffff'];
+            let count = 0;
+            const interval = setInterval(() => {
+                const x = Math.random() * canvas.width * 0.8 + canvas.width * 0.1;
+                const y = Math.random() * canvas.height * 0.5 + 50;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                for (let i = 0; i < 60; i++) {
+                    particles.push(new Particle(x, y, color));
+                }
+                count++;
+                if (count > 12) clearInterval(interval);
+            }, 400);
+            setTimeout(() => { fireworksActive = false; }, 8000);
+        }
+
+        function animateFireworks() {
+            if (particles.length > 0) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                particles = particles.filter(p => p.life > 0);
+            }
+            requestAnimationFrame(animateFireworks);
+        }
+        animateFireworks();
+
+        // ========== MUSIC (Web Audio API melody) ==========
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyTimeout = null;
+
+        function toggleMusic() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (isPlaying) {
+                isPlaying = false;
+                document.getElementById('musicBars').classList.remove('playing');
+            } else {
+                isPlaying = true;
+                document.getElementById('musicBars').classList.add('playing');
+                playMelody();
+            }
+        }
+
+        function playNote(freq, startTime, duration, type = 'sine') {
+            if (!audioCtx || !isPlaying) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, startTime);
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(0.15, startTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+        }
+
+        function playMelody() {
+            if (!isPlaying) return;
+            const now = audioCtx.currentTime;
+            // Simple beautiful melody
+            const notes = [
+                [523.25, 0, 0.5], [587.33, 0.5, 0.5], [659.25, 1.0, 0.5],
+                [523.25, 1.5, 0.5], [659.25, 2.0, 0.5], [698.46, 2.5, 0.5],
+                [659.25, 3.0, 1.0], [587.33, 4.0, 0.5], [523.25, 4.5, 0.5],
+                [493.88, 5.0, 0.5], [523.25, 5.5, 0.5], [587.33, 6.0, 1.0],
+                [523.25, 7.0, 0.5], [493.88, 7.5, 0.5], [440.00, 8.0, 0.5],
+                [493.88, 8.5, 0.5], [523.25, 9.0, 1.0],
+                [587.33, 10.0, 0.5], [659.25, 10.5, 0.5], [698.46, 11.0, 0.5],
+                [783.99, 11.5, 0.5], [659.25, 12.0, 1.0],
+                [587.33, 13.0, 0.5], [523.25, 13.5, 0.5], [587.33, 14.0, 0.5],
+                [523.25, 14.5, 0.5], [440.00, 15.0, 1.0],
+            ];
+            notes.forEach(([freq, time, dur]) => {
+                playNote(freq, now + time, dur, 'sine');
+                playNote(freq * 0.5, now + time, dur * 1.2, 'triangle');
+            });
+            melodyTimeout = setTimeout(() => playMelody(), 16500);
+        }
+
+        // ========== COUNTER ANIMATION ==========
+        // The 8 in the hero pulses on load
+        const heroEight = document.querySelector('.hero-eight');
+        if (heroEight) {
+            heroEight.addEventListener('click', () => {
+                heroEight.animate([
+                    { transform: 'scale(1) rotate(0)' },
+                    { transform: 'scale(1.2) rotate(5deg)' },
+                    { transform: 'scale(1) rotate(0)' }
+                ], { duration: 600, easing: 'ease-out' });
+                for (let i = 0; i < 20; i++) setTimeout(createConfetti, i * 50);
+            });
+        }
+
+        // ========== HEART CLICK ANIMATION ==========
+        document.querySelectorAll('.heart-container').forEach(heart => {
+            heart.addEventListener('click', () => {
+                heart.animate([
+                    { transform: 'scale(1)' },
+                    { transform: 'scale(1.3)' },
+                    { transform: 'scale(1)' }
+                ], { duration: 500, easing: 'ease-out' });
+
+                // Emit mini hearts
+                for (let i = 0; i < 8; i++) {
+                    const miniHeart = document.createElement('div');
+                    miniHeart.textContent = '❤️';
+                    miniHeart.style.cssText = `
+                        position: fixed;
+                        pointer-events: none;
+                        z-index: 9999;
+                        font-size: ${12 + Math.random() * 16}px;
+                    `;
+                    const rect = heart.getBoundingClientRect();
+                    miniHeart.style.left = rect.left + rect.width / 2 + 'px';
+                    miniHeart.style.top = rect.top + rect.height / 2 + 'px';
+                    document.body.appendChild(miniHeart);
+
+                    miniHeart.animate([
+                        { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                        { transform: `translate(${-80 + Math.random() * 160}px, ${-100 - Math.random() * 100}px) scale(0)`, opacity: 0 }
+                    ], { duration: 1000 + Math.random() * 500, easing: 'ease-out' });
+
+                    setTimeout(() => miniHeart.remove(), 1500);
+                }
+            });
+        });
+
+        // ========== SMOOTH PARALLAX ==========
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent && scrollY < window.innerHeight) {
+                heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
+                heroContent.style.opacity = 1 - scrollY / window.innerHeight;
+            }
+        });
+    </script>
+</body>
+</html>
